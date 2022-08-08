@@ -7165,11 +7165,35 @@ MonoBehaviour:
     m_ActionId: 34d60891-54d0-4f60-b6d2-c81da04113ff
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3141507670349493509}
+        m_TargetAssemblyTypeName: DinoController, Assembly-CSharp
+        m_MethodName: OnSpaceBar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0a634b20-f574-4253-b1fb-e383c19c9626
     m_ActionName: Player/Jump
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3141507670349493509}
+        m_TargetAssemblyTypeName: DinoController, Assembly-CSharp
+        m_MethodName: OnLCtrl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0216303d-bd9b-43c3-a781-72c5d3dcc22c
     m_ActionName: Player/Crouch
   m_NeverAutoSwitchControlSchemes: 0

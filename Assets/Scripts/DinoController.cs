@@ -32,6 +32,8 @@ public class DinoController : MonoBehaviour {
 		}
 	}
 
+	// public methods
+
 	public void BeginGame() {
 		animator.SetBool("Idling", false);
 	}
@@ -49,7 +51,6 @@ public class DinoController : MonoBehaviour {
 		}
 
 		Vector2 cursorPos = Pointer.current.position.ReadValue();
-		BoxCollider thisCollider = transform.GetChild(0).GetComponent<BoxCollider>();	// retrieve the collider from the armature
 		// crouch
 		if (Touchscreen.current == null && cursorPos.x <= (Screen.width / 2.0f)) {
 			Crouch(triggered);
@@ -57,14 +58,19 @@ public class DinoController : MonoBehaviour {
 		}
 
 		// jump
-		if (triggered && !jumping) {
-			thisRB.AddForce(Vector3.up * jumpForce, ForceMode.Force);
-			jumping = true;
-			animator.SetBool("Jumping", true);
-			thisCollider.center = new Vector3(thisCollider.center.x, thisCollider.center.y, colliderJumpChange.x);
-			thisCollider.size = new Vector3(thisCollider.size.x, thisCollider.size.y, colliderJumpChange.y);
-		}
+		Jump(true);
 	}
+
+	public void OnSpaceBar(InputAction.CallbackContext context) {
+		Debug.Log("space pressed");
+		Jump(context.ReadValueAsButton());
+	}
+
+	public void OnLCtrl(InputAction.CallbackContext context) {
+		Crouch(context.ReadValueAsButton());
+	}
+
+	// unity events other than start, update, awake, etc..
 
 	private void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == "ground") {
@@ -78,6 +84,13 @@ public class DinoController : MonoBehaviour {
 			}
 		}
 	}
+
+	private void OnTriggerEnter(Collider other) {
+		Time.timeScale = 0.0f;
+		restartMenu.SetActive(true);
+	}
+
+	// private utility methods
 
 	private void Crouch(bool flag) {
 		BoxCollider thisCollider = transform.GetChild(0).GetComponent<BoxCollider>();   // retrieve the collider from the armature
@@ -94,9 +107,15 @@ public class DinoController : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter(Collider other) {
-		Time.timeScale = 0.0f;
-		restartMenu.SetActive(true);
+	private void Jump(bool flag) {
+		BoxCollider thisCollider = transform.GetChild(0).GetComponent<BoxCollider>();
+		if (flag && !jumping) {
+			thisRB.AddForce(Vector3.up * jumpForce, ForceMode.Force);
+			jumping = true;
+			animator.SetBool("Jumping", true);
+			thisCollider.center = new Vector3(thisCollider.center.x, thisCollider.center.y, colliderJumpChange.x);
+			thisCollider.size = new Vector3(thisCollider.size.x, thisCollider.size.y, colliderJumpChange.y);
+		}
 	}
 }
  
